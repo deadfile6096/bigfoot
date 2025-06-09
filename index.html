@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigTruth: Traces of Legend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="icon" type="image/png" href="img/favicon/favicon.png">
+    <meta name="description" content="The truth about Bigfoot that they don't want you to know">
+</head>
+<body class="home-page">
+    <div class="noise-overlay"></div>
+    <div class="scanline"></div>
+    
+    <header>
+        <div class="logo-container">
+            <h1 class="logo glitch" data-text="BigTruth">BigTruth</h1>
+            <span class="logo-subtitle">TRACES OF LEGEND</span>
+        </div>
+        <div class="header-center">
+            <a href="https://x.com/home" target="_blank" class="twitter-logo-link">
+                <img src="img/twitter.png" alt="Twitter Logo" class="twitter-logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero" class="active">HOME</a></li>
+                <li><a href="#map-section">SIGHTINGS MAP</a></li>
+                <li><a href="#gallery-section">CLASSIFIED IMAGERY</a></li>
+                <li><a href="#theories-section">THEORIES</a></li>
+                <li><a href="#report-section">REPORT SIGHTING</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <video class="hero-background-video" autoplay loop muted playsinline disablePictureInPicture>
+                <source src="video/videoplayback.webm" type="video/webm">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2 class="main-title glitch" data-text="BIGFOOT EXISTS.">BIGFOOT EXISTS.</h2>
+                <h3 class="subtitle">You saw it — they covered it up.</h3>
+                <p class="text-reveal">Classified documents. Real witnesses. The investigation begins now.</p>
+                <div class="cta-container">
+                    <a href="#map-section" class="cta-button" id="declassifyBtn">DECLASSIFY EVIDENCE</a>
+                    <div class="button-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="map-section" class="page-section">
+            <section class="map-intro">
+                <h2 class="section-title glitch" data-text="CONFIRMED SIGHTINGS DATABASE">CONFIRMED SIGHTINGS DATABASE</h2>
+                <div class="classified-banner">
+                    <span class="classified-text">TOP SECRET</span>
+                    <span class="classified-id">ACCESS LEVEL: ALPHA</span>
+                </div>
+                <p class="map-description">This map contains validated Bigfoot sightings from our network of researchers and witnesses. Every location has been verified through multiple sources. Data includes timestamps, coordinates, and eyewitness reports that the authorities have attempted to suppress.</p>
+            </section>
+
+            <section class="map-container">
+                <div class="map-controls">
+                    <div class="control-panel">
+                        <h3>FILTER OPTIONS</h3>
+                        <div class="control-group">
+                            <label for="year-range">Year Range:</label>
+                            <select id="year-range">
+                                <option value="all">All Years</option>
+                                <option value="2020-2025">2020-2025</option>
+                                <option value="2015-2020">2015-2020</option>
+                                <option value="2010-2015">2010-2015</option>
+                                <option value="2000-2010">2000-2010</option>
+                                <option value="pre-2000">Before 2000</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="evidence-type">Evidence Type:</label>
+                            <select id="evidence-type">
+                                <option value="all">All Evidence Types</option>
+                                <option value="visual">Visual Sighting</option>
+                                <option value="tracks">Footprints/Tracks</option>
+                                <option value="audio">Audio Recording</option>
+                                <option value="physical">Physical Evidence</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="reliability">Reliability Rating:</label>
+                            <select id="reliability">
+                                <option value="all">All Ratings</option>
+                                <option value="confirmed">Confirmed (A)</option>
+                                <option value="probable">Probable (B)</option>
+                                <option value="possible">Possible (C)</option>
+                            </select>
+                        </div>
+                        <button id="apply-filters" class="control-button">APPLY FILTERS</button>
+                        <button id="reset-filters" class="control-button secondary">RESET</button>
+                    </div>
+                    <div class="map-legend">
+                        <h3>MAP LEGEND</h3>
+                        <div class="legend-item">
+                            <span class="legend-marker confirmed"></span>
+                            <span class="legend-label">Confirmed Sighting (A)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker probable"></span>
+                            <span class="legend-label">Probable Sighting (B)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker possible"></span>
+                            <span class="legend-label">Possible Sighting (C)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker hotzone"></span>
+                            <span class="legend-label">Activity Hotzone</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker restricted"></span>
+                            <span class="legend-label">Restricted Area</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="map" id="sightings-map">
+                    <!-- Map will be generated with JavaScript -->
+                    <!-- Placeholder for the SVG map -->
+                    <div class="loading-overlay">
+                        <div class="loading-text">LOADING CLASSIFIED DATA...</div>
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recent-reports">
+                <h2 class="section-title">LATEST VERIFIED REPORTS</h2>
+                <div class="report-cards">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <span class="report-id">REPORT #BF-2025-06-03</span>
+                            <span class="report-status confirmed">CONFIRMED</span>
+                        </div>
+                        <div class="report-content">
+                            <div class="report-details">
+                                <p><strong>Date:</strong> June 3, 2025</p>
+                                <p><strong>Location:</strong> Olympic National Park, WA</p>
+                                <p><strong>Coordinates:</strong> 47.802°N, 123.604°W</p>
+                                <p><strong>Evidence:</strong> Visual sighting, thermal imaging</p>
+                            </div>
+                            <div class="report-summary">
+                                "Subject was observed moving through dense forest at approximately 22:30. Thermal imaging captured distinct bipedal heat signature approximately 8-9 feet tall. Subject displayed non-human movement patterns and awareness of observation team."
+                            </div>
+                        </div>
+                        <div class="report-footer">
+                            <!-- Кнопка VIEW FULL REPORT удалена -->
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-header">
+                            <span class="report-id">REPORT #BF-2025-04-17</span>
+                            <span class="report-status probable">PROBABLE</span>
+                        </div>
+                        <div class="report-content">
+                            <div class="report-details">
+                                <p><strong>Date:</strong> April 17, 2025</p>
+                                <p><strong>Location:</strong> Adirondack Mountains, NY</p>
+                                <p><strong>Coordinates:</strong> 44.092°N, 73.855°W</p>
+                                <p><strong>Evidence:</strong> Footprints, audio recording</p>
+                            </div>
+                            <div class="report-summary">
+                                "Series of large footprints (18.7 inches) discovered along remote creek. Audio recording captured unusual vocalizations described as 'between a howl and a deep growl' at 03:15. Two local hunters reported visual confirmation."
+                            </div>
+                        </div>
+                        <div class="report-footer">
+                            <!-- Кнопка VIEW FULL REPORT удалена -->
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <div class="report-header">
+                            <span class="report-id">REPORT #BF-2025-03-22</span>
+                            <span class="report-status confirmed">CONFIRMED</span>
+                        </div>
+                        <div class="report-content">
+                            <div class="report-details">
+                                <p><strong>Date:</strong> March 22, 2025</p>
+                                <p><strong>Location:</strong> Mount Hood National Forest, OR</p>
+                                <p><strong>Coordinates:</strong> 45.322°N, 121.711°W</p>
+                                <p><strong>Evidence:</strong> Visual sighting, hair samples</p>
+                            </div>
+                            <div class="report-summary">
+                                "Research team collected hair samples from tree bark at height of 8'2". DNA analysis shows primate markers with unknown genetic sequences. Two team members reported direct visual contact at dusk. Local authorities denied permission for follow-up investigation."
+                            </div>
+                        </div>
+                        <div class="report-footer">
+                            <!-- Кнопка VIEW FULL REPORT удалена -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="gallery-section" class="page-section">
+            <section class="gallery-intro">
+                <h2 class="section-title glitch" data-text="CLASSIFIED IMAGERY">CLASSIFIED IMAGERY</h2>
+                <div class="warning-banner">
+                    <div class="warning-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="8" height="8">
+                            <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z" fill="#ff0000"/>
+                            <path d="M12 16c.8 0 1.5-.7 1.5-1.5S12.8 13 12 13s-1.5.7-1.5 1.5.7 1.5 1.5 1.5z" fill="#ff0000"/>
+                            <path d="M11 10h2v4h-2z" fill="#ff0000"/>
+                        </svg>
+                    </div>
+                    <div class="warning-text">
+                        <p>WARNING: THE FOLLOWING IMAGES ARE CLASSIFIED</p>
+                        <p>Viewing these materials may put you at risk of surveillance</p>
+                    </div>
+                </div>
+                <p class="gallery-description">This gallery contains verified photographs and images of Bigfoot encounters that have been systematically suppressed by authorities. Many of these images were obtained through whistleblowers, remote sensing equipment, and our network of researchers. The truth cannot remain hidden.</p>
+            </section>
+
+            <section class="image-gallery">
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="thermal">
+                        <div class="image-container">
+                            <div class="image-placeholder thermal">
+                                <img src="img/gallery/1.jpg" alt="Thermal Signature - Olympic National Forest" class="classified-image">
+                                <div class="thermal-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-TH-2024-03-17</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="night">
+                        <div class="image-container">
+                            <div class="image-placeholder night-vision">
+                                <img src="img/gallery/2.webp" alt="Night Vision - Cascade Mountains" class="classified-image">
+                                <div class="night-vision-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-NV-2023-11-28</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="evidence">
+                        <div class="image-container">
+                            <div class="image-placeholder evidence">
+                                <img src="img/gallery/3.jpg" alt="Hair Sample Analysis - DNA Anomalies" class="classified-image">
+                                <div class="evidence-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-EV-2024-01-05</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="satellite">
+                        <div class="image-container">
+                            <div class="image-placeholder satellite">
+                                <img src="img/gallery/4.jpg" alt="Satellite Imagery - Mt. Baker Wilderness" class="classified-image">
+                                <div class="satellite-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-SAT-2023-09-12</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="thermal">
+                        <div class="image-container">
+                            <div class="image-placeholder thermal">
+                                <img src="img/gallery/5.jpg" alt="Thermal Anomaly - Redwood National Forest" class="classified-image">
+                                <div class="thermal-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-TH-2023-12-03</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="night">
+                        <div class="image-container">
+                            <div class="image-placeholder night-vision">
+                                <img src="img/gallery/6.jpg" alt="Night Vision - Territorial Display" class="classified-image">
+                                <div class="night-vision-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-NV-2024-02-19</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="evidence">
+                        <div class="image-container">
+                            <div class="image-placeholder evidence">
+                                <img src="img/gallery/7.jpg" alt="Footprint Cast - Size Comparison" class="classified-image">
+                                <div class="evidence-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-EV-2024-04-22</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+
+                    <div class="gallery-item" data-category="satellite">
+                        <div class="image-container">
+                            <div class="image-placeholder satellite">
+                                <img src="img/gallery/8.jpg" alt="Migration Pattern Tracking - Pacific Northwest" class="classified-image">
+                                <div class="satellite-overlay"></div>
+                            </div>
+                            <div class="image-metadata">
+                                <span class="image-id">IMG-SAT-2023-10-08</span>
+                                <span class="image-classification">CLASSIFIED</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </section>
+
+            <section class="declassified-section">
+                <h2 class="section-title">RECENTLY DECLASSIFIED</h2>
+                <div class="declassified-container">
+                    <div class="declassified-document">
+                        <div class="document-header">
+                            <h3>PROJECT WILDMAN - SPECIMEN OBSERVATION LOG</h3>
+                            <div class="document-stamps">
+                                <span class="document-stamp declassified">DECLASSIFIED</span>
+                                <span class="document-stamp date">02/17/2025</span>
+                            </div>
+                        </div>
+                        <div class="document-content">
+                            <p>Date: [REDACTED]<br>
+                            Location: Site Echo, [REDACTED] National Forest<br>
+                            Observer: Dr. [REDACTED], Biology Division</p>
+
+                            <p>Subject continues to demonstrate advanced problem-solving capabilities far exceeding baseline primates. Tool usage observed for the third consecutive day. Subject constructed primitive shelter using fallen branches and vegetation, demonstrating understanding of structural integrity principles.</p>
+
+                            <p>Communication attempts using established primate sign language yielded partial success. Subject appears to comprehend approximately 35% of gestures and responded with what appears to be intentional signaling. Recording devices placed as per protocol.</p>
+
+                            <p>NOTE: Subject appears aware of surveillance. Recommend repositioning observation posts and reducing team size to prevent further awareness.</p>
+
+                            <p class="redacted-text">████████████████████████████████████████████████████████████</p>
+
+                            <p>Recommendation: Continue observation protocol Alpha-7. Increase distance of observation posts. Prepare retrieval team in case of sample opportunity.</p>
+
+                            <p>Authorization: Col. ████████<br>
+                            Division: Special Wildlife Research Unit<br>
+                            Clearance: COSMIC/UMBRA</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="theories-section" class="page-section">
+            <section class="theories-intro">
+                <h2 class="section-title glitch" data-text="CLASSIFIED THEORIES">CLASSIFIED THEORIES</h2>
+                <p class="theories-description">After decades of research and hundreds of verified sightings, our network has developed several theories about the true nature of the entity known as "Bigfoot." The following information is compiled from classified documents, insider testimonies, and our own field research.</p>
+            </section>
+
+            <section class="theories-container">
+                <div class="theory-card" id="darpa">
+                    <div class="theory-header">
+                        <h3 class="theory-title">THE DARPA EXPERIMENT THEORY</h3>
+                        <span class="theory-classification">CLASSIFICATION: MOST RESTRICTED</span>
+                    </div>
+                    <div class="theory-content">
+                        <div class="theory-icon">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="#0aff9d" stroke-width="2" fill="none"/>
+                                <polygon points="50,20 65,35 35,35" fill="#0aff9d"/>
+                                <rect x="40" y="35" width="20" height="30" fill="#0aff9d"/>
+                                <rect x="35" y="65" width="30" height="15" fill="#0aff9d"/>
+                                <line x1="30" y1="40" x2="70" y2="40" stroke="#0aff9d" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="theory-details">
+                            <p>Evidence suggests that Bigfoot may be the result of a classified DARPA genetic engineering program initiated in the late 1960s. The program, codenamed "TITAN STRIDE," aimed to create enhanced reconnaissance agents capable of surviving in extreme wilderness conditions without support.</p>
+                            
+                            <h4>KEY EVIDENCE:</h4>
+                            <ul>
+                                <li>Declassified budget documents from 1967-1974 show over $2.1 billion allocated to an unspecified "Anthropomorphic Field Asset Development" program</li>
+                                <li>Multiple ex-military personnel have testified about facilities in remote areas of the Pacific Northwest that were conducting "primate enhancement" experiments</li>
+                                <li>The pattern of sightings correlates strongly with the locations of known DARPA testing grounds</li>
+                                <li>Hair samples have shown evidence of artificial genetic modifications to primate DNA</li>
+                            </ul>
+                            
+                            <div class="theory-quote">
+                                <blockquote>"What we created was never meant to be released into the wild. When the subjects escaped containment in '73, the decision was made to deny their existence rather than admit to the program."</blockquote>
+                                <cite>— Anonymous DARPA scientist, 1997 interview</cite>
+                            </div>
+                            
+                            <p>Our research indicates that at least 17 "subjects" escaped from containment facilities, with possible breeding occurring in the decades since. Government agencies actively monitor these populations while publicly denying their existence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theory-card" id="portal">
+                    <div class="theory-header">
+                        <h3 class="theory-title">THE INTERDIMENSIONAL PORTAL THEORY</h3>
+                        <span class="theory-classification">CLASSIFICATION: EXTREME ANOMALY</span>
+                    </div>
+                    <div class="theory-content">
+                        <div class="theory-icon">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="#0aff9d" stroke-width="2" fill="none"/>
+                                <ellipse cx="50" cy="50" rx="30" ry="10" stroke="#0aff9d" stroke-width="2" fill="none" transform="rotate(45, 50, 50)"/>
+                                <ellipse cx="50" cy="50" rx="30" ry="10" stroke="#0aff9d" stroke-width="2" fill="none" transform="rotate(135, 50, 50)"/>
+                                <circle cx="50" cy="50" r="10" fill="#0aff9d" opacity="0.7"/>
+                            </svg>
+                        </div>
+                        <div class="theory-details">
+                            <p>Mounting evidence suggests Bigfoot creatures may be interdimensional entities that cross into our reality through naturally occurring portals in remote wilderness areas. This would explain their ability to appear and disappear seemingly at will and the lack of conventional biological evidence.</p>
+                            
+                            <h4>KEY EVIDENCE:</h4>
+                            <ul>
+                                <li>Multiple electromagnetic anomalies detected before and after confirmed sightings</li>
+                                <li>NASA and NOAA satellites have recorded unexplained "dimensional thinning" in areas with high sighting concentrations</li>
+                                <li>Witnesses frequently report strange light phenomena, time distortions, and electronic malfunctions during encounters</li>
+                                <li>Footprint trails that inexplicably begin and end abruptly in open areas</li>
+                            </ul>
+                            
+                            <div class="theory-quote">
+                                <blockquote>"The quantum readings we collected at the site were unlike anything in our scientific literature. For approximately 3.7 seconds, that forest clearing simply wasn't entirely within our dimensional framework."</blockquote>
+                                <cite>— Dr. Eleanor Reeves, Quantum Physics Research Group</cite>
+                            </div>
+                            
+                            <p>Our field teams have documented recurring portal events in seven major hotspots across North America. Government agencies have established monitoring stations disguised as environmental research outposts near these locations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theory-card" id="telepathic">
+                    <div class="theory-header">
+                        <h3 class="theory-title">THE TELEPATHIC ENTITY THEORY</h3>
+                        <span class="theory-classification">CLASSIFICATION: PSYCHIC PHENOMENON</span>
+                    </div>
+                    <div class="theory-content">
+                        <div class="theory-icon">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="#0aff9d" stroke-width="2" fill="none"/>
+                                <circle cx="50" cy="50" r="20" stroke="#0aff9d" stroke-width="2" fill="none"/>
+                                <path d="M 50 30 Q 70 50 50 70 Q 30 50 50 30" stroke="#0aff9d" stroke-width="2" fill="none"/>
+                                <path d="M 30 50 Q 50 70 70 50 Q 50 30 30 50" stroke="#0aff9d" stroke-width="2" fill="none"/>
+                                <circle cx="50" cy="50" r="5" fill="#0aff9d"/>
+                            </svg>
+                        </div>
+                        <div class="theory-details">
+                            <p>Neurological data from witnesses suggests that Bigfoot possesses advanced telepathic abilities that allow it to influence human perception. This theory proposes that the creature can both project false imagery and erase memories of encounters, explaining the elusiveness of concrete evidence.</p>
+                            
+                            <h4>KEY EVIDENCE:</h4>
+                            <ul>
+                                <li>Brain scans of witnesses show unusual activity in the temporal lobes and pineal gland after reported encounters</li>
+                                <li>Multiple witnesses report "knowing" the creature was present before visual confirmation</li>
+                                <li>Consistent reports of "missing time" during encounters, ranging from minutes to hours</li>
+                                <li>Psychological evaluations of witnesses show unique patterns of memory fragmentation specific to the encounter event</li>
+                            </ul>
+                            
+                            <div class="theory-quote">
+                                <blockquote>"It wasn't like seeing something normal. It was like... the creature was somehow inside my head, letting me see it. And then later, I couldn't remember details, like my brain had been selectively wiped."</blockquote>
+                                <cite>— Anonymous witness, Olympic Peninsula, 2024</cite>
+                            </div>
+                            
+                            <p>Our researchers have developed specialized cognitive protocols to help witnesses recover altered or suppressed memories. Several government agencies have established specialized units to study this phenomenon, classified under "non-human intelligence research."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="connection-section">
+                <h2 class="section-title">CONNECTING THE DOTS</h2>
+                <div class="connection-diagram">
+                    <div class="connection-node" id="node1">
+                        <div class="node-content">
+                            <h4>GOVERNMENT COVER-UP</h4>
+                            <p>Systematic denial and evidence suppression</p>
+                        </div>
+                        <div class="node-connections">
+                            <div class="connection" data-connects="node1-node2"></div>
+                            <div class="connection" data-connects="node1-node3"></div>
+                        </div>
+                    </div>
+                    <div class="connection-node" id="node2">
+                        <div class="node-content">
+                            <h4>ELECTROMAGNETIC ANOMALIES</h4>
+                            <p>Unexplained field disturbances at sighting locations</p>
+                        </div>
+                        <div class="node-connections">
+                            <div class="connection" data-connects="node2-node4"></div>
+                        </div>
+                    </div>
+                    <div class="connection-node" id="node3">
+                        <div class="node-content">
+                            <h4>GENETIC TAMPERING</h4>
+                            <p>Unidentifiable DNA sequences in samples</p>
+                        </div>
+                        <div class="node-connections">
+                            <div class="connection" data-connects="node3-node5"></div>
+                        </div>
+                    </div>
+                    <div class="connection-node" id="node4">
+                        <div class="node-content">
+                            <h4>WITNESS MEMORY ALTERATIONS</h4>
+                            <p>Consistent patterns of selective amnesia</p>
+                        </div>
+                        <div class="node-connections">
+                            <div class="connection" data-connects="node4-node5"></div>
+                            <div class="connection" data-connects="node4-node6"></div>
+                        </div>
+                    </div>
+                    <div class="connection-node" id="node5">
+                        <div class="node-content">
+                            <h4>RESTRICTED AREAS</h4>
+                            <p>Sudden closure of public lands after sightings</p>
+                        </div>
+                        <div class="node-connections">
+                            <div class="connection" data-connects="node5-node6"></div>
+                        </div>
+                    </div>
+                    <div class="connection-node" id="node6">
+                        <div class="node-content">
+                            <h4>THE TRUTH</h4>
+                            <p>What are they hiding?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="report-section" class="page-section">
+            <section class="report-intro">
+                <h2 class="section-title glitch" data-text="REPORT YOUR SIGHTING">REPORT YOUR SIGHTING</h2>
+                <div class="secure-banner">
+                    <div class="secure-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="8" height="8">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#0aff9d"/>
+                            <path d="M12 7a2 2 0 0 0-2 2v3a2 2 0 0 0 4 0V9a2 2 0 0 0-2-2z" fill="#0a0a0a"/>
+                            <path d="M12 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="#0a0a0a"/>
+                        </svg>
+                    </div>
+                    <div class="secure-text">
+                        <p>SECURE ENCRYPTED CONNECTION</p>
+                        <p>Your information is protected from government surveillance</p>
+                    </div>
+                </div>
+                <p class="report-description">Have you witnessed something that cannot be explained? Have you seen a creature matching the description of Bigfoot in the wilderness? Your testimony is crucial to exposing the truth. Fill out this secure form to report your sighting. All information is kept strictly confidential, and a researcher from our network may contact you for more details.</p>
+            </section>
+
+            <section class="report-form-section">
+                <div class="form-container">
+                    <form id="sighting-form" class="sighting-form">
+                        <div class="form-group">
+                            <label for="witness-name">Witness Name <span class="optional">(Pseudonyms accepted)</span></label>
+                            <input type="text" id="witness-name" name="witness-name" class="form-input" placeholder="Enter your name or alias">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="witness-email">Contact Email <span class="required">*</span></label>
+                            <input type="email" id="witness-email" name="witness-email" class="form-input" placeholder="Your email will remain confidential" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="sighting-date">Date of Sighting <span class="required">*</span></label>
+                                <div class="custom-date-input">
+                                    <input type="text" id="sighting-date" name="sighting-date" class="form-input" placeholder="MM/DD/YYYY" required pattern="\d{2}/\d{2}/\d{4}">
+                                </div>
+                            </div>
+                            <div class="form-group half">
+                                <label for="sighting-time">Time of Sighting</label>
+                                <div class="custom-time-input">
+                                    <input type="text" id="sighting-time" name="sighting-time" class="form-input" placeholder="HH:MM (24hr)" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sighting-location">Location <span class="required">*</span></label>
+                            <input type="text" id="sighting-location" name="sighting-location" class="form-input" placeholder="Be as specific as possible" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="latitude">Latitude <span class="optional">(if known)</span></label>
+                                <input type="text" id="latitude" name="latitude" class="form-input" placeholder="e.g. 47.6062">
+                            </div>
+                            <div class="form-group half">
+                                <label for="longitude">Longitude <span class="optional">(if known)</span></label>
+                                <input type="text" id="longitude" name="longitude" class="form-input" placeholder="e.g. -122.3321">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Evidence Type <span class="required">*</span></label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="evidence-type" value="visual"> Visual Sighting
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="evidence-type" value="audio"> Audio/Sounds
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="evidence-type" value="tracks"> Footprints/Tracks
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="evidence-type" value="physical"> Physical Evidence
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sighting-description">Detailed Description <span class="required">*</span></label>
+                            <textarea id="sighting-description" name="sighting-description" class="form-input textarea" rows="6" placeholder="Describe what you saw in as much detail as possible. Include information about appearance, movement, behavior, and any other relevant details" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="witness-count">Number of Witnesses</label>
+                            <select id="witness-count" name="witness-count" class="form-input">
+                                <option value="1">Just me</option>
+                                <option value="2">2 people</option>
+                                <option value="3">3 people</option>
+                                <option value="4">4 people</option>
+                                <option value="5+">5 or more people</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file-upload">Upload Photo/Video Evidence <span class="optional">(optional)</span></label>
+                            <div class="file-upload-container">
+                                <input type="file" id="file-upload" name="file-upload" class="file-input" accept="image/*,video/*" style="opacity: 0; position: absolute; z-index: -1;">
+                                <div class="custom-file-upload">
+                                    <button type="button" class="custom-upload-btn" id="custom-upload-btn">CHOOSE FILE</button>
+                                    <div class="file-name-display" id="file-name-display">No file selected</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label consent-label">
+                                <input type="checkbox" name="contact-consent" required>
+                                <span>I consent to be contacted by a BigTruth researcher about my sighting <span class="required">*</span></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label consent-label">
+                                <input type="checkbox" name="anonymous-consent">
+                                <span>I would like to remain anonymous in any published reports</span>
+                            </label>
+                        </div>
+
+                        <div class="security-notice">
+                            <p>All submissions are encrypted and stored on secure, off-grid servers.</p>
+                        </div>
+
+                        <div class="form-submit">
+                            <button type="submit" class="submit-button">SUBMIT REPORT</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="witness-protection">
+                <h2 class="section-title">WITNESS PROTECTION</h2>
+                <div class="protection-content">
+                    <p>If you've seen something the authorities don't want exposed, you may be at risk. Our network offers support and protection for whistleblowers and witnesses.</p>
+                    
+                    <h3>Safety Guidelines:</h3>
+                    <ul class="safety-list">
+                        <li>Do not discuss your sighting with government agencies or officials</li>
+                        <li>Secure all photographic or physical evidence in multiple locations</li>
+                        <li>Be aware of unusual surveillance or unmarked vehicles in your area</li>
+                        <li>Consider using encrypted communications for all related correspondence</li>
+                        <li>If approached by "researchers" with government credentials, contact us immediately</li>
+                    </ul>
+
+                    <div class="emergency-contact">
+                        <h3>EMERGENCY WITNESS HOTLINE</h3>
+                        <p class="hotline">USE CODE: <span class="emergency-code">HIDDEN-TRUTH-927</span></p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="sighting-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="sighting-title">Sighting Details</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="sighting-detail">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="report-title">Report Details</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="report-detail">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="image-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="image-modal-title">CLASSIFIED IMAGE</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="image-detail">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="submission-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>REPORT RECEIVED</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="success-animation">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <p class="modal-message">Your report has been successfully encrypted and submitted to our secure database.</p>
+                <p class="modal-submessage">A trusted researcher from our network will contact you shortly to discuss your sighting.</p>
+                <div class="report-id">
+                    <p>YOUR REPORT ID: <span id="generated-report-id">BF-20250609-<span class="randomized-id">A7X29</span></span></p>
+                </div>
+                <p class="security-warning">For your security, please save this ID and reference it in all future communications.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">BigTruth</div>
+            <p class="footer-tagline">The truth can't stay hidden forever.</p>
+            <p class="footer-disclaimer">This site contains information that THEY don't want you to know.</p>
+            <div class="footer-links">
+                <a href="#" id="secretAccessBtn">SECRET ACCESS</a>
+                <span class="separator">|</span>
+                <a href="#report-section">REPORT SIGHTING</a>
+            </div>
+            <p class="copyright">© 2025 BigTruth Research Network</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="declassifyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ACCESSING CLASSIFIED DATABASE</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-title">SECURE CONNECTION ESTABLISHED</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="command-line">$ <span class="type-text">initiating secure connection...</span></div>
+                        <div class="command-line">$ <span class="type-text">bypassing security protocols...</span></div>
+                        <div class="command-line">$ <span class="type-text">accessing classified database...</span></div>
+                        <div class="command-line">$ <span class="type-text">decrypting files...</span></div>
+                        <div class="command-line response">Access granted. Welcome, TRUTH SEEKER.</div>
+                        <div class="command-line">$ <span class="type-text">displaying classified information...</span></div>
+                    </div>
+                </div>
+                <div class="classified-info">
+                    <p>We've been monitoring Bigfoot activity for decades. The creature is real.</p>
+                    <p>Our network has documented hundreds of sightings that government agencies have actively suppressed.</p>
+                    <p>Explore our database to discover the truth they've been hiding from you.</p>
+                    <div class="evidence-links">
+                        <a href="#map-section" class="evidence-link">VIEW SIGHTINGS MAP</a>
+                        <a href="#theories-section" class="evidence-link">EXPLORE THEORIES</a>
+                        <a href="#gallery-section" class="evidence-link">LEAKED IMAGES</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

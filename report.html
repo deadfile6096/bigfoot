@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Sighting - BigTruth: Traces of Legend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/favicon/favicon.png">
+    <meta name="description" content="Report your Bigfoot sighting - Join the truth seekers">
+</head>
+<body class="report-page">
+    <div class="noise-overlay"></div>
+    <div class="scanline"></div>
+    
+    <header>
+        <div class="logo-container">
+            <h1 class="logo glitch" data-text="BigTruth">BigTruth</h1>
+            <span class="logo-subtitle">TRACES OF LEGEND</span>
+        </div>
+        <div class="header-center">
+            <a href="https://x.com/home" target="_blank" class="twitter-logo-link">
+                <img src="img/twitter.png" alt="Twitter Logo" class="twitter-logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="map.html">SIGHTINGS MAP</a></li>
+                <li><a href="theories.html">THEORIES</a></li>
+                <li><a href="gallery.html">CLASSIFIED IMAGES</a></li>
+                <li><a href="report.html" class="active">REPORT SIGHTING</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="report-intro">
+            <h2 class="section-title glitch" data-text="REPORT YOUR SIGHTING">REPORT YOUR SIGHTING</h2>
+            <div class="secure-banner">
+                <div class="secure-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="8" height="8">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#0aff9d"/>
+                        <path d="M12 7a2 2 0 0 0-2 2v3a2 2 0 0 0 4 0V9a2 2 0 0 0-2-2z" fill="#0a0a0a"/>
+                        <path d="M12 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="#0a0a0a"/>
+                    </svg>
+                </div>
+                <div class="secure-text">
+                    <p>SECURE ENCRYPTED CONNECTION</p>
+                    <p>Your information is protected from government surveillance</p>
+                </div>
+            </div>
+            <p class="report-description">Have you witnessed something that cannot be explained? Have you seen a creature matching the description of Bigfoot in the wilderness? Your testimony is crucial to exposing the truth. Fill out this secure form to report your sighting. All information is kept strictly confidential, and a researcher from our network may contact you for more details.</p>
+        </section>
+
+        <section class="report-form-section">
+            <div class="form-container">
+                <form id="sighting-form" class="sighting-form">
+                    <div class="form-group">
+                        <label for="witness-name">Witness Name <span class="optional">(Pseudonyms accepted)</span></label>
+                        <input type="text" id="witness-name" name="witness-name" class="form-input" placeholder="Enter your name or alias">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="witness-email">Contact Email <span class="required">*</span></label>
+                        <input type="email" id="witness-email" name="witness-email" class="form-input" placeholder="Your email will remain confidential" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="sighting-date">Date of Sighting <span class="required">*</span></label>
+                            <div class="custom-date-input">
+                                <input type="text" id="sighting-date" name="sighting-date" class="form-input" placeholder="MM/DD/YYYY" required pattern="\d{2}/\d{2}/\d{4}">
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label for="sighting-time">Time of Sighting</label>
+                            <div class="custom-time-input">
+                                <input type="text" id="sighting-time" name="sighting-time" class="form-input" placeholder="HH:MM (24hr)" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sighting-location">Location <span class="required">*</span></label>
+                        <input type="text" id="sighting-location" name="sighting-location" class="form-input" placeholder="Be as specific as possible" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="latitude">Latitude <span class="optional">(if known)</span></label>
+                            <input type="text" id="latitude" name="latitude" class="form-input" placeholder="e.g. 47.6062">
+                        </div>
+                        <div class="form-group half">
+                            <label for="longitude">Longitude <span class="optional">(if known)</span></label>
+                            <input type="text" id="longitude" name="longitude" class="form-input" placeholder="e.g. -122.3321">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Evidence Type <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evidence-type" value="visual"> Visual Sighting
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evidence-type" value="audio"> Audio/Sounds
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evidence-type" value="tracks"> Footprints/Tracks
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evidence-type" value="physical"> Physical Evidence
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sighting-description">Detailed Description <span class="required">*</span></label>
+                        <textarea id="sighting-description" name="sighting-description" class="form-input textarea" rows="6" placeholder="Describe what you saw in as much detail as possible. Include information about appearance, movement, behavior, and any other relevant details" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="witness-count">Number of Witnesses</label>
+                        <select id="witness-count" name="witness-count" class="form-input">
+                            <option value="1">Just me</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                            <option value="5+">5 or more people</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file-upload">Upload Photo/Video Evidence <span class="optional">(optional)</span></label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file-upload" name="file-upload" class="file-input" accept="image/*,video/*" style="opacity: 0; position: absolute; z-index: -1;">
+                            <div class="custom-file-upload">
+                                <button type="button" class="custom-upload-btn" id="custom-upload-btn">CHOOSE FILE</button>
+                                <div class="file-name-display" id="file-name-display">No file selected</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label consent-label">
+                            <input type="checkbox" name="contact-consent" required>
+                            <span>I consent to be contacted by a BigTruth researcher about my sighting <span class="required">*</span></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label consent-label">
+                            <input type="checkbox" name="anonymous-consent">
+                            <span>I would like to remain anonymous in any published reports</span>
+                        </label>
+                    </div>
+
+                    <div class="security-notice">
+                        <p>All submissions are encrypted and stored on secure, off-grid servers.</p>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="submit-button">SUBMIT REPORT</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="witness-protection">
+            <h2 class="section-title">WITNESS PROTECTION</h2>
+            <div class="protection-content">
+                <p>If you've seen something the authorities don't want exposed, you may be at risk. Our network offers support and protection for whistleblowers and witnesses.</p>
+                
+                <h3>Safety Guidelines:</h3>
+                <ul class="safety-list">
+                    <li>Do not discuss your sighting with government agencies or officials</li>
+                    <li>Secure all photographic or physical evidence in multiple locations</li>
+                    <li>Be aware of unusual surveillance or unmarked vehicles in your area</li>
+                    <li>Consider using encrypted communications for all related correspondence</li>
+                    <li>If approached by "researchers" with government credentials, contact us immediately</li>
+                </ul>
+
+                <div class="emergency-contact">
+                    <h3>EMERGENCY WITNESS HOTLINE</h3>
+                    <p class="hotline">USE CODE: <span class="emergency-code">HIDDEN-TRUTH-927</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="submission-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>REPORT RECEIVED</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="success-animation">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <p class="modal-message">Your report has been successfully encrypted and submitted to our secure database.</p>
+                <p class="modal-submessage">A trusted researcher from our network will contact you shortly to discuss your sighting.</p>
+                <div class="report-id">
+                    <p>YOUR REPORT ID: <span id="generated-report-id">BF-20250609-<span class="randomized-id">A7X29</span></span></p>
+                </div>
+                <p class="security-warning">For your security, please save this ID and reference it in all future communications.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">BigTruth</div>
+            <p class="footer-tagline">The truth can't stay hidden forever.</p>
+            <p class="footer-disclaimer">This site contains information that THEY don't want you to know.</p>
+            <div class="footer-links">
+                <a href="#" id="secretAccessBtn">SECRET ACCESS</a>
+                <span class="separator">|</span>
+                <a href="report.html">REPORT SIGHTING</a>
+            </div>
+            <p class="copyright">© 2025 BigTruth Research Network</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

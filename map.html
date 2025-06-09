@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sightings Map - BigTruth: Traces of Legend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/favicon/favicon.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <meta name="description" content="Classified map of documented Bigfoot sightings">
+</head>
+<body class="map-page">
+    <div class="noise-overlay"></div>
+    <div class="scanline"></div>
+    
+    <header>
+        <div class="logo-container">
+            <h1 class="logo glitch" data-text="BigTruth">BigTruth</h1>
+            <span class="logo-subtitle">TRACES OF LEGEND</span>
+        </div>
+        <div class="header-center">
+            <a href="https://x.com/home" target="_blank" class="twitter-logo-link">
+                <img src="img/twitter.png" alt="Twitter Logo" class="twitter-logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="map.html" class="active">SIGHTINGS MAP</a></li>
+                <li><a href="theories.html">THEORIES</a></li>
+                <li><a href="gallery.html">CLASSIFIED IMAGES</a></li>
+                <li><a href="report.html">REPORT SIGHTING</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="map-intro">
+            <h2 class="section-title glitch" data-text="CONFIRMED SIGHTINGS DATABASE">CONFIRMED SIGHTINGS DATABASE</h2>
+            <div class="classified-banner">
+                <span class="classified-text">TOP SECRET</span>
+                <span class="classified-id">ACCESS LEVEL: ALPHA</span>
+            </div>
+            <p class="map-description">This map contains validated Bigfoot sightings from our network of researchers and witnesses. Every location has been verified through multiple sources. Data includes timestamps, coordinates, and eyewitness reports that the authorities have attempted to suppress.</p>
+        </section>
+
+        <section class="map-container">
+            <div class="map-controls">
+                <div class="control-panel">
+                    <h3>FILTER OPTIONS</h3>
+                    <div class="control-group">
+                        <label for="year-range">Year Range:</label>
+                        <select id="year-range">
+                            <option value="all">All Years</option>
+                            <option value="2020-2025">2020-2025</option>
+                            <option value="2015-2020">2015-2020</option>
+                            <option value="2010-2015">2010-2015</option>
+                            <option value="2000-2010">2000-2010</option>
+                            <option value="pre-2000">Before 2000</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="evidence-type">Evidence Type:</label>
+                        <select id="evidence-type">
+                            <option value="all">All Evidence Types</option>
+                            <option value="visual">Visual Sighting</option>
+                            <option value="tracks">Footprints/Tracks</option>
+                            <option value="audio">Audio Recording</option>
+                            <option value="physical">Physical Evidence</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="reliability">Reliability Rating:</label>
+                        <select id="reliability">
+                            <option value="all">All Ratings</option>
+                            <option value="confirmed">Confirmed (A)</option>
+                            <option value="probable">Probable (B)</option>
+                            <option value="possible">Possible (C)</option>
+                        </select>
+                    </div>
+                    <button id="apply-filters" class="control-button">APPLY FILTERS</button>
+                    <button id="reset-filters" class="control-button secondary">RESET</button>
+                </div>
+                <div class="map-legend">
+                    <h3>MAP LEGEND</h3>
+                    <div class="legend-item">
+                        <span class="legend-marker confirmed"></span>
+                        <span class="legend-label">Confirmed Sighting (A)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker probable"></span>
+                        <span class="legend-label">Probable Sighting (B)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker possible"></span>
+                        <span class="legend-label">Possible Sighting (C)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker hotzone"></span>
+                        <span class="legend-label">Activity Hotzone</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker restricted"></span>
+                        <span class="legend-label">Restricted Area</span>
+                    </div>
+                </div>
+            </div>
+            <div class="map" id="sightings-map">
+                <!-- Map will be generated with JavaScript -->
+                <!-- Placeholder for the SVG map -->
+                <div class="loading-overlay">
+                    <div class="loading-text">LOADING CLASSIFIED DATA...</div>
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-reports">
+            <h2 class="section-title">LATEST VERIFIED REPORTS</h2>
+            <div class="report-cards">
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">REPORT #BF-2025-06-03</span>
+                        <span class="report-status confirmed">CONFIRMED</span>
+                    </div>
+                    <div class="report-content">
+                        <div class="report-details">
+                            <p><strong>Date:</strong> June 3, 2025</p>
+                            <p><strong>Location:</strong> Olympic National Park, WA</p>
+                            <p><strong>Coordinates:</strong> 47.802°N, 123.604°W</p>
+                            <p><strong>Evidence:</strong> Visual sighting, thermal imaging</p>
+                        </div>
+                        <div class="report-summary">
+                            "Subject was observed moving through dense forest at approximately 22:30. Thermal imaging captured distinct bipedal heat signature approximately 8-9 feet tall. Subject displayed non-human movement patterns and awareness of observation team."
+                        </div>
+                    </div>
+                    <div class="report-footer">
+                        <!-- Кнопка VIEW FULL REPORT удалена -->
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">REPORT #BF-2025-04-17</span>
+                        <span class="report-status probable">PROBABLE</span>
+                    </div>
+                    <div class="report-content">
+                        <div class="report-details">
+                            <p><strong>Date:</strong> April 17, 2025</p>
+                            <p><strong>Location:</strong> Adirondack Mountains, NY</p>
+                            <p><strong>Coordinates:</strong> 44.092°N, 73.855°W</p>
+                            <p><strong>Evidence:</strong> Footprints, audio recording</p>
+                        </div>
+                        <div class="report-summary">
+                            "Series of large footprints (18.7 inches) discovered along remote creek. Audio recording captured unusual vocalizations described as 'between a howl and a deep growl' at 03:15. Two local hunters reported visual confirmation."
+                        </div>
+                    </div>
+                    <div class="report-footer">
+                        <!-- Кнопка VIEW FULL REPORT удалена -->
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">REPORT #BF-2025-03-22</span>
+                        <span class="report-status confirmed">CONFIRMED</span>
+                    </div>
+                    <div class="report-content">
+                        <div class="report-details">
+                            <p><strong>Date:</strong> March 22, 2025</p>
+                            <p><strong>Location:</strong> Mount Hood National Forest, OR</p>
+                            <p><strong>Coordinates:</strong> 45.322°N, 121.711°W</p>
+                            <p><strong>Evidence:</strong> Visual sighting, hair samples</p>
+                        </div>
+                        <div class="report-summary">
+                            "Research team collected hair samples from tree bark at height of 8'2". DNA analysis shows primate markers with unknown genetic sequences. Two team members reported direct visual contact at dusk. Local authorities denied permission for follow-up investigation."
+                        </div>
+                    </div>
+                    <div class="report-footer">
+                        <!-- Кнопка VIEW FULL REPORT удалена -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="sighting-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>SIGHTING DETAILS</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="sighting-details">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div id="report-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="report-modal-title">SIGHTING REPORT</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="report-details">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">BigTruth</div>
+            <p class="footer-tagline">The truth can't stay hidden forever.</p>
+            <p class="footer-disclaimer">This site contains information that THEY don't want you to know.</p>
+            <div class="footer-links">
+                <a href="#" id="secretAccessBtn">SECRET ACCESS</a>
+                <span class="separator">|</span>
+                <a href="report.html">REPORT SIGHTING</a>
+            </div>
+            <p class="copyright"> 2025 BigTruth Research Network</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
